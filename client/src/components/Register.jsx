@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+
 import { useForm } from '../hooks/useForm';
-import toast, {Toaster} from 'react-hot-toast';
+
 
 const Register = () => {
 
@@ -14,7 +12,6 @@ const Register = () => {
     phone: '',
     password: '',
     confirm: ''
-
   }
 
   const validationsForm = (form) => {
@@ -61,16 +58,15 @@ const Register = () => {
     return errors
   }
 
-  const {form, errors, loading, response, handleChange, handleBlur, handleSubmit} = useForm(initialForm, validationsForm, 'register')
+  const {form, errors, loading, response, handleChange, handleBlur, handleSubmit, handleOver} = useForm(initialForm, validationsForm, 'register')
 
   return (
       <div className='col px-5'>
-        <Toaster />
         <form className='row w-75' onSubmit={handleSubmit}>
           <h3>Register</h3>
           <div className='col-md-6'>
             <label htmlFor="" className='form-label'>Soy</label>
-            <select className='form-control' name="business" id="businnes" onChange={handleChange}>
+            <select className='form-control' name="business" id="businnes" onChange={handleChange} >
               <option value='true'>Empresa</option>
               <option value='false'>Particular</option>
             </select>
@@ -106,13 +102,13 @@ const Register = () => {
           </div>
           <div>
             <label htmlFor="" className='form-label'>Confirmar Contraseña</label>
-            <input value={form.confirm} type="password" name="confirm" id="confirm" className='form-control' onChange={handleChange} onBlur={handleBlur}/>
+            <input value={form.confirm} type="password" name="confirm" id="confirm" className='form-control' onChange={handleChange} onBlur={handleBlur} />
             {
               errors.confirm && <p className='text-danger'>{errors.confirm}</p>
             }
             
           </div>
-          <button id='register' className='btn btn-primary w-25 mx-auto my-3' type='submit' >Registrar</button>
+          <button id='register' className='btn btn-primary w-25 mx-auto my-3' type='submit' onMouseOver={handleOver} >Registrar</button>
         </form>
       </div>
   )

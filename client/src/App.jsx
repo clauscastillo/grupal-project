@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 import './App.css'
 import Access from './views/Access'
 import AddService from './views/AddService'
@@ -17,6 +17,7 @@ const App = () =>  {
   return (
     <div className="App">
       <BrowserRouter>
+      <Toaster />
         <Routes>
           <Route path='/' element={<Index />}></Route>
           <Route path='/home' element={<Home />}></Route>
