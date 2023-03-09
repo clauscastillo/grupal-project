@@ -1,24 +1,29 @@
-[✔] Agregar validacion de datos a todos los formularios
 
+   José 
+
+[] Agregar iconos interactivos con fontawesome
+
+[] Diseño y maquetado con bootstrap
+
+   Claus
 [] Crear estado de loading para las paginas con los toast, usar el Toaster
    en el componente principal para renderizar en todas las rutas
 
-[] Hacer validacion 
-
-[] Mejorar visualizacion de servicios en la tabla y en su pagina de detalle
-
-[] Agregar iconos interactivos
-
-[] Hacer validacion de datos en un helper
-
 [] Crear respuesta de front por datos no validos
-
-[] Migrar del localStorage a Cookies
-
-[] Subir a AWS
 
 [] Hacer clave de registro de funcionarios
 
+[] Hacer validacion de datos en un helper
+
+   Augusto
+
+[] Migrar login y register con cookies
+
+[] Rutas privadas de la forma correcta
+
+si alcanza
+
+[] Subir a AWS
 
 
 
