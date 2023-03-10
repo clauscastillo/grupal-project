@@ -30,7 +30,7 @@ const Login = () => {
     return errors
   } 
 
-  const {form, errors, loading, response, handleChange, handleBlur, handleSubmit} = useForm(initialForm, validationsForm, 'login')
+  const {form, errors, loading, response, handleChange, handleBlur, handleSubmit, handleOver} = useForm(initialForm, validationsForm, 'login')
 
   return (
     <div className='col px-5'>
@@ -38,19 +38,19 @@ const Login = () => {
         <h3>Iniciar sesión</h3>
         <div>
           <label className='form-label'>Correo</label>
-          <input type="text" name="email" className='form-control' onChange={handleChange} />
+          <input type="text" name="email" className='form-control' value={form.email} onChange={handleChange} onBlur={handleBlur}/>
           {
             errors.email && <p className='text-danger'>{errors.email}</p>
           }
         </div>
         <div>
           <label className='form-label'>Contraseña</label>
-          <input type="password" name="password" className='form-control' onChange={handleChange}/>
+          <input type="password" name="password" className='form-control' value={form.password} onChange={handleChange} onBlur={handleBlur}/>
           {
             errors.password && <p className='text-danger'>{errors.password}</p>
           }
         </div>
-        <button className='btn btn-primary' type='submit'>Login</button>  
+        <button className='btn btn-primary' type='submit' onMouseOver={handleOver}>Login</button>  
       </form>
     </div>
       
