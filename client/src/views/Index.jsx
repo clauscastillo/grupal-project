@@ -6,7 +6,6 @@ import Footer from '../components/Footer'
 const Index = () => {
   return (
     <div>
-      <Header />
       <div className='bg-i'>
         <div className='rounded p-5 text-light text-center bg-dark w-50 mx-auto my-auto'>
           <h1>Solicite Diagnostico y/o presupuesto</h1>
@@ -15,7 +14,6 @@ const Index = () => {
         </div>
         
       </div>
-      <Footer />
     </div>
   )
 }

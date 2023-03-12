@@ -79,8 +79,6 @@ const AddService = () => {
 
   return (
     <div>
-      <Toaster />
-      <Header />
       <Link to='/home'></Link>
       <h2 className='text-center'>Solicitud de servicio</h2>
       <form className='grid w-25 text-center mx-auto' onSubmit={handleSubmit}>
@@ -104,7 +102,6 @@ const AddService = () => {
 
         
       </form>
-      <Footer />
     </div>
   )
 }

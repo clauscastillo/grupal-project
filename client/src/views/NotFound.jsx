@@ -7,7 +7,6 @@ import notFound from '../img/notFound.png'
 const NotFound = () => {
   return (
     <div>
-      <Header/>
       <div className='text-center'>
         <h1>
           404: Ruta no existente
@@ -15,8 +14,7 @@ const NotFound = () => {
         <img src={notFound} alt="graphic-notfound" width='700px' />
       </div>
       
-      
-      <Footer/>
+
     </div>
   )
 }

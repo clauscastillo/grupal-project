@@ -3,8 +3,8 @@ mongoose.set('strictQuery', true);
 const User = require('../models/users.model');
 
 mongoose.connect(process.env.DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 })
 .then(() => {
     console.log('Established a connection to the database');
