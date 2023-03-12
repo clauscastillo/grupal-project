@@ -53,6 +53,9 @@ export const useForm = (initialForm, validateForm, origin) => {
           collaborator: false
           }, {withCredentials: true, credentials:'include'})
           .then((res) => {
+            if(res.status == 400) {
+              console.log('Email ya existe')
+            }
             setLoading(false);
             setResponse("Creado con exito");
             localStorage.setItem('user', res.data.accessToken);
@@ -62,10 +65,12 @@ export const useForm = (initialForm, validateForm, origin) => {
           })
           .catch((err) => {
             toast.remove()
-            console.log(err);
+            if(err.response.data == 'email already exist') {
+              toast.error('Email ya existente. Intenta iniciar sesión')
+            }else{
+              toast.error('No fue creado')
+            }
             setLoading(false);
-            setResponse("No fue creado")
-            toast.error('Usuario no fue creado')
           })
           }
         } else{
