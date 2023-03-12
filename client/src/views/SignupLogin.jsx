@@ -7,13 +7,11 @@ import Register from '../components/Register'
 const SignupLogin = () => {
   return (
     <div>
-      <Header />
       <div className='row g-12'>
         <Register />
         <Login />
       </div>
       
-      <Footer />
     </div>
   )
 }

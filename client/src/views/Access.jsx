@@ -37,7 +37,7 @@ const Access = () => {
 
   return (
     <div>
-      <Header />
+      
       <form className='col w-25 mx-auto' onSubmit={handleSubmit}>
         <h3>Iniciar sesión</h3>
         <div>
@@ -59,7 +59,6 @@ const Access = () => {
           !errors.password && !errors.email && <p className='text-danger'>{response}</p>
         }
         </form>
-        <Footer />  
     </div>
   )
 }

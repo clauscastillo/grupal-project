@@ -30,7 +30,6 @@ const Service = () => {
 
   return (
     <div>
-      <Header />
       <Link to='/home'><button className='btn btn-outline-secondary'>Volver a Home</button></Link>
       <div className='grid w-50 mx-auto'>
         <h3>{service.title}</h3>
@@ -49,7 +48,6 @@ const Service = () => {
         <button className='btn btn-danger' onClick={handleDelete}>Delete Service</button>
       </div>
       
-      <Footer />
     </div>
   )
 }

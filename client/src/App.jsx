@@ -10,6 +10,8 @@ import NotFound from './views/NotFound'
 import Service from './views/Service'
 import SignupLogin from './views/SignupLogin'
 import Status from './views/Status'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 const App = () =>  {
   
@@ -18,6 +20,7 @@ const App = () =>  {
     <div className="App">
       <BrowserRouter>
       <Toaster />
+      <Header />
         <Routes>
           <Route path='/' element={<Index />}></Route>
           <Route path='/home' element={<Home />}></Route>
@@ -29,6 +32,7 @@ const App = () =>  {
           <Route path='/access' element={<Access />}></Route>
           <Route path='*' element={<NotFound/>}></Route>
         </Routes>
+      <Footer />
       </BrowserRouter>
       
     </div>

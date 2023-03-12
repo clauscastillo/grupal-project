@@ -74,7 +74,6 @@ const Status = () => {
 
   return (
     <div>
-      <Header />
       <Link to='/inbox'><button className='btn btn-outline-secondary'>Volver a Inbox</button></Link>
       <div className='grid w-50 mx-auto'>
         <h2>{service.client}</h2>
@@ -109,7 +108,6 @@ const Status = () => {
         </form>
       </div>
       
-      <Footer />
     </div>
   )
 }

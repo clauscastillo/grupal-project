@@ -36,8 +36,6 @@ const Home = () => {
   
   return (
     <div>
-      <Header />
-      <Toaster />
       <div className='w-75 mx-auto'>
         <h2 className='linea-bloque m-2'>{services.user.name}</h2>
         <button className='btn btn-secondary linea-bloqueada' onClick={handleLogout}>Logout</button>
@@ -93,7 +91,6 @@ const Home = () => {
           </tbody>
         </table>
       </div>
-      <Footer />
 		</div>
   )
 }
