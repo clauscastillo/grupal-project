@@ -8,6 +8,7 @@ module.exports = {
     getUser: async(req, res) => {
       const token = req.headers.user
       const user = jwt.verify(token, SECRET)
+      console.log(user)
       User.findById(user._id)
       .then((response) => {   
         res.json(response)
@@ -16,11 +17,19 @@ module.exports = {
 
     registerUser: async(req, res) => {
       try{
-        const newUser = await User.create(req.body);
-        console.log(newUser._id)
-        const userToken = jwt.sign({_id:newUser._id}, SECRET)
-        console.log(userToken)
-        res.status(200).json({accessToken: userToken})
+        User.findOne({email: req.body.email})
+        .then(async(resdb) => {
+          if (resdb) {
+            res.status(400).json('email already exist')
+          }else {
+            const newUser = await User.create(req.body);
+            console.log(newUser._id)
+            const userToken = jwt.sign({_id:newUser._id}, SECRET)
+            console.log(userToken)
+            res.status(200).json({accessToken: userToken})
+          }
+        })
+        
       }catch(error){
         res.status(404).json(error)
       }
@@ -67,5 +76,10 @@ module.exports = {
       }catch(error){
         console.log(error)
       }
+    },
+
+    getAllUsers: async(req, res) => {
+      User.find()
+      .then((resdb) => res.json(resdb))
     }
   }

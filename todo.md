@@ -6,20 +6,20 @@
 [] Diseño y maquetado con bootstrap
 
    Claus
-[] Crear helper para el useForm
-
-[] No permitir loguearse dos veces con el mismo correo
-
-[] Crea error de onBlur en cada campo especifico 
-
-[] Crear estado de loading para las paginas con los toast, usar el Toaster
-   en el componente principal para renderizar en todas las rutas
-
-[] Crear respuesta de front por datos no validos
 
 [] Hacer clave de registro de funcionarios
 
-[] Hacer validacion de datos en un helper
+[] Crea error de onBlur en cada campo especifico, con helper para las validaciones
+
+[] Hacer helpers para funciones del useForm
+
+[✔] Crear estado de loading para las paginas con los toast, usar el Toaster
+   en el componente principal para renderizar en todas las rutas
+
+[✔] No permitir loguearse dos veces con el mismo correo
+
+[✔] Crear respuesta de front por datos no validos
+
 
    Augusto
 
@@ -30,6 +30,11 @@
 si alcanza
 
 [] Subir a AWS
+
+
+Extras
+
+[] Verificar edicion de servicios por parte de funcionarios con fecha y hora
 
 
 

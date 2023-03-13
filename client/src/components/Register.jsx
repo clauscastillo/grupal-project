@@ -5,6 +5,8 @@ import { useForm } from '../hooks/useForm';
 
 const Register = () => {
 
+  console.log()
+
   const initialForm = {
     business: "true",
     name: '',
