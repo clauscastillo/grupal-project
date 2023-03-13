@@ -12,6 +12,7 @@ import SignupLogin from './views/SignupLogin'
 import Status from './views/Status'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Panel from './views/Panel'
 
 const App = () =>  {
   
@@ -30,6 +31,7 @@ const App = () =>  {
           <Route path='/inbox' element={<Inbox />}></Route>
           <Route path='/status/:id' element={<Status/>}></Route>
           <Route path='/access' element={<Access />}></Route>
+          <Route path='/panel' element={<Panel />}></Route>
           <Route path='*' element={<NotFound/>}></Route>
         </Routes>
       <Footer />

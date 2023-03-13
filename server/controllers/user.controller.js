@@ -76,5 +76,10 @@ module.exports = {
       }catch(error){
         console.log(error)
       }
+    },
+
+    getAllUsers: async(req, res) => {
+      User.find()
+      .then((resdb) => res.json(resdb))
     }
   }

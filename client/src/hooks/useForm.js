@@ -125,12 +125,20 @@ export const useForm = (initialForm, validateForm, origin) => {
         setLoading(false);
         setResponse("Logueado")
         localStorage.setItem('user', res.data.accessToken)
-        navegar('/inbox')
+        if(form.name == 'admin') {
+          navegar('/panel')
+        } else {
+          navegar('/inbox')
+        }
+        toast.remove()
       })
       .catch((err) => {
+        toast.remove()
         setLoading(false);
         setResponse("No autorizado")
-        console.log(err)
+        toast.error('Usuario y/o contraseña incorrectos')
+
+        
       })
     } else {
       console.log('No se detecta el origen')
