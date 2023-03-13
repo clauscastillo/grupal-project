@@ -14,6 +14,8 @@ const Register = () => {
     confirm: ''
   }
 
+  console.log(initialForm, "initialform")
+
   const validationsForm = (form) => {
     let errors = {};
     let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;

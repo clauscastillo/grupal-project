@@ -9,16 +9,17 @@ const cors = require('cors');
 // Iniciar server
 
 app.listen(port, () => {
-    console.log('Server run at port ' + port)
+  console.log('Server run at port ' + port)
 })
 
 // Configuracion para peticiones cruzadas y lectura de POST
 app.use(cors({
-    origin:'http://localhost:5173',
-    credentials: true
+  origin: 'http://localhost:5173',
+  origin: 'http://127.0.0.1:5173',
+  credentials: true
 }));
 
-app.use(express.json()); 
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Configuracion de mongoose
@@ -40,14 +41,14 @@ const fecha = new Date();
 const dia = fecha.getDate();
 const mes = () => {
   const conversor = fecha.getMonth();
-  switch(conversor){
+  switch (conversor) {
     case 1:
       return 'Febrero';
       break;
     case 2:
       return 'Marzo'
-    }
-}; 
+  }
+};
 const anio = fecha.getFullYear()
 
 const horalocal = fecha.getHours()
