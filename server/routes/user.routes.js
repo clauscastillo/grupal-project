@@ -1,6 +1,5 @@
 const { registerUser, loginUser, register, login, isLogged, logOutUser, getUser, loginUserInternal } = require('../controllers/user.controller')
 
-
 module.exports = (app) => {
     // app.post('/api/registeruser', registerUser)
 
@@ -19,5 +18,6 @@ module.exports = (app) => {
     app.get('/api/islogged', isLogged)
 
 
+    app.get('/api/allusers', getAllUsers)
 }
 

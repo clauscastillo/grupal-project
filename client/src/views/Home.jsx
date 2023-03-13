@@ -22,77 +22,78 @@ const Home = () => {
     .then((res) => {
       setServices(res.data);
       setLoading(true)
-      switch(services.status){
-        case 'esperando': 
-      }
+
     })
-  })
+  }, [])
 
 
   const handleLogout = () => {
     localStorage.removeItem('user')
     navegar('/register')
   }
-  
-  return (
-    <div>
-      <div className='w-75 mx-auto'>
-        <h2 className='linea-bloque m-2'>{services.user.name}</h2>
-        <button className='btn btn-secondary linea-bloqueada' onClick={handleLogout}>Logout</button>
-        <Link to={'/addservice'}><button className='btn btn-primary bloque'>Solicitar servicio</button></Link>
-        <h4>Servicios solicitados</h4>
-        <table className='table table-striped'>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Titulo</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-            services.services.map((service, index) => {
-              if(service.status === 'Pendiente') {
-                return (
-                  <tr key={index}>
-                    <td>{service.date}</td>
-                    <td><Link to={'/service/' + service._id}>{service.title}</Link></td>
-                    <td>{service.status}</td>
-                  </tr>
-                )
+  if (loading) {
+    return (
+      <div>
+        <div className='w-75 mx-auto'>
+          <h2 className='linea-bloque m-2'>{services.user.name}</h2>
+          <button className='btn btn-secondary linea-bloqueada' onClick={handleLogout}>Logout</button>
+          <Link to={'/addservice'}><button className='btn btn-primary bloque'>Solicitar servicio</button></Link>
+          <h4>Servicios solicitados</h4>
+          <table className='table table-striped'>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Titulo</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+              services.services.map((service, index) => {
+                if(service.status === 'Pendiente') {
+                  return (
+                    <tr key={index}>
+                      <td>{service.date}</td>
+                      <td><Link to={'/service/' + service._id}>{service.title}</Link></td>
+                      <td>{service.status}</td>
+                    </tr>
+                  )
+                }
+                })
               }
-              })
-            }
-          </tbody>
-        </table>
-        <h4>Servicios en tramites</h4>
-        <table className='table table-striped'>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Titulo</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-            services.services.map((service, index) => {
-              if(service.status !== 'Pendiente') {
-                return (
-                  <tr key={index}>
-                    <td>{service.date}</td>
-                    <td><Link to={'/service/' + service._id}>{service.title}</Link></td>
-                    <td>{service.status}</td>
-                  </tr>
-                )
+            </tbody>
+          </table>
+          <h4>Servicios en tramites</h4>
+          <table className='table table-striped'>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Titulo</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+              services.services.map((service, index) => {
+                if(service.status !== 'Pendiente') {
+                  return (
+                    <tr key={index}>
+                      <td>{service.date}</td>
+                      <td><Link to={'/service/' + service._id}>{service.title}</Link></td>
+                      <td>{service.status}</td>
+                    </tr>
+                  )
+                }
+                })
               }
-              })
-            }
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
-		</div>
-  )
+    )
+
+  }
+  
 }
 
 export default Home
