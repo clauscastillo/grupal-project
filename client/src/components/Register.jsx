@@ -139,6 +139,7 @@ const Register = () => {
   const [form, setForm] = useState(initialForm)
   const [loading, setLoading] = useState(false);
   const [empty, setEmpty] = useState(true)
+  const [response, setResponse] = useState(null)
   const [errors, setErrors] = useState({
     name: null,
     email: null,
