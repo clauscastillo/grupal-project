@@ -5,25 +5,13 @@ const SECRET = process.env.KEYJWT
 
 module.exports = {
 
-<<<<<<< HEAD
   getUser: async (req, res) => {
-    const token = req.headers.user
-    const user = jwt.verify(token, SECRET)
-    User.findById(user._id)
+    User.find()
       .then((response) => {
-=======
-    getUser: async(req, res) => {
-      const token = req.headers.user
-      const user = jwt.verify(token, SECRET)
-      console.log(user)
-      User.findById(user._id)
-      .then((response) => {   
->>>>>>> main
         res.json(response)
       })
   },
 
-<<<<<<< HEAD
   register: async (req, res) => {
     try {
       const nuevoUsuario = await User.create(req.body)
@@ -50,32 +38,6 @@ module.exports = {
         const userToken = jwt.sign({ _id: user._id }, SECRET)
         console.log(userToken)
         res.status(201).cookie('userToken', userToken, { httpOnly: true }).json({ successMessage: "Usuario logeado", user })
-=======
-    registerUser: async(req, res) => {
-      try{
-        User.findOne({email: req.body.email})
-        .then(async(resdb) => {
-          if (resdb) {
-            res.status(400).json('email already exist')
-          }else {
-            const newUser = await User.create(req.body);
-            console.log(newUser._id)
-            const userToken = jwt.sign({_id:newUser._id}, SECRET)
-            console.log(userToken)
-            res.status(200).json({accessToken: userToken})
-          }
-        })
-        
-      }catch(error){
-        res.status(404).json(error)
-      }
-    },
-  
-    loginUser: async (req, res)=>{
-      const user = await User.findOne({email:req.body.email})
-      if(!user){
-          res.status(400).json({error: "Email no existe"})
->>>>>>> main
       }
     } catch (error) {
       res.status(400).json({ error: "Email/Password no valido" })
@@ -85,7 +47,17 @@ module.exports = {
   isLogged: (req, res) => {
     console.log(req.cookies, "isLogged")
     res.json({ message: "Ok", active: true });
+  },
+  userLogged: (req, res) => {
+    console.log("llego al server")
+    // jwt.verify(req.cookies.userToken, SECRET, (error, payload) => {
+    // console.log(payload, "payload")
+    // console.log(req.cookies, "cookies")
+    console.log(req.cookies, "cookies")
 
+    // User.find({ user: payload._id })
+    //     .then((user) => (res.json({ user })))
+    //     .catch((error) => ({ message: "error finding user", error }))
   },
   logOutUser: (req, res) => {
     console.log(req.cookies, "Request")
@@ -146,16 +118,9 @@ module.exports = {
         }
 
       }
-<<<<<<< HEAD
     } catch (error) {
       console.log(error)
-=======
-    },
 
-    getAllUsers: async(req, res) => {
-      User.find()
-      .then((resdb) => res.json(resdb))
->>>>>>> main
     }
   }
 }

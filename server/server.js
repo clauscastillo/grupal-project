@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 8000;
 const cors = require('cors');
-
+const cookieParser = require('cookie-parser'); // para recibir cookies
 
 // Iniciar server
 
@@ -21,6 +21,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser()) // implementar cookie-parser en al app
 
 // Configuracion de mongoose
 

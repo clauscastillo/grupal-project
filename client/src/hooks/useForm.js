@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'; 
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -8,7 +8,7 @@ export const useForm = (initialForm, validateForm, origin) => {
   const navegar = useNavigate()
 
 
-  const [form, setForm] =  useState(initialForm);
+  const [form, setForm] = useState(initialForm);
   const [empty, setEmpty] = useState(true)
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ export const useForm = (initialForm, validateForm, origin) => {
 
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setForm({
       ...form,
       [name]: value
@@ -25,128 +25,128 @@ export const useForm = (initialForm, validateForm, origin) => {
   }
 
   const handleOver = (e) => {
-    if(!empty){
+    if (!empty) {
       setErrors(validateForm(form));
     }
-    
+
   }
   const handleBlur = (e) => {
     handleChange(e);
     setErrors(validateForm(form));
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     setErrors(validateForm(form));
     setLoading(true)
     e.preventDefault();
     toast.loading('Cargando')
-    
-    if(origin == 'register') {
-      const {business, name, email, phone, password, confirm} = form;
-      if(name && email && phone && password && confirm) {
+
+    if (origin == 'register') {
+      const { business, name, email, phone, password, confirm } = form;
+      if (name && email && phone && password && confirm) {
         console.log('entra')
-        if(Object.keys(errors).length === 0) {
+        if (Object.keys(errors).length === 0) {
           setLoading(true);
           Boolean(business)
           axios.post('http://localhost:8000/api/registeruser', {
-          ...form,
-          collaborator: false
-          }, {withCredentials: true, credentials:'include'})
-          .then((res) => {
-            if(res.status == 400) {
-              console.log('Email ya existe')
-            }
-            setLoading(false);
-            setResponse("Creado con exito");
-            localStorage.setItem('user', res.data.accessToken);
-            navegar('/home');
-            toast.remove()
-            toast.success('Usuario Registrado con exito', {duration: 5000})
-          })
-          .catch((err) => {
-            toast.remove()
-            if(err.response.data == 'email already exist') {
-              toast.error('Email ya existente. Intenta iniciar sesión')
-            }else{
-              toast.error('No fue creado')
-            }
-            setLoading(false);
-          })
-          }
-        } else{
-          toast.remove()
-          toast.error('Introduzca todos los datos correctamente')
-        }
-        
-    }else if(origin == 'login'){
-      const {email, password} = form
-      if(email && password) {
-        axios.post('http://localhost:8000/api/login', form, {withCredentials: true, credentials:'include'})
-        .then((res) => {  
-          setLoading(false);
-          setResponse("Inicio de sesion exitoso")
-          localStorage.setItem('user', res.data.accessToken)
-          navegar('/home')
-          toast.remove()
-          toast('Bienvenido de nuevo', {duration: 5000, icon: '🙌'})
-        })
-        .catch((err) => {
-        toast.remove();
-        console.log(err);
-        setLoading(false);
-        setResponse("Fallido")
-        toast.error('Correo y/o contraseña incorrrectos')
-        })
-        } else{
-          toast.remove();
-          toast.error('Introduzca todos los datos correctamente')
-        }
-    } else if (origin == 'addservice') {
-        axios.post('http://localhost:8000/api/newservice', form, {withCredentials: true, credentials:'include'})
-            .then((res) => { 
-              toast.remove()
+            ...form,
+            collaborator: false
+          }, { withCredentials: true, credentials: 'include' })
+            .then((res) => {
+              if (res.status == 400) {
+                console.log('Email ya existe')
+              }
               setLoading(false);
-              setResponse("Servicio enviado")
-              console.log(res)
-              setForm(initialForm)
-              toast.success('Servicio creado correctamente')
+              setResponse("Creado con exito");
+              localStorage.setItem('user', res.data.accessToken);
+              navegar('/home');
+              toast.remove()
+              toast.success('Usuario Registrado con exito', { duration: 5000 })
             })
             .catch((err) => {
               toast.remove()
-              console.log(err);
+              if (err.response.data == 'email already exist') {
+                toast.error('Email ya existente. Intenta iniciar sesión')
+              } else {
+                toast.error('No fue creado')
+              }
               setLoading(false);
-              setResponse("Fallido")
-              toast.error('Servicio no fue creado')
             })
-            
-    } else if(origin == 'access') {
-      axios.post('http://localhost:8000/api/login/internal', form, {withCredentials: true, credentials:'include'})
-      .then((res) => {  
-        setLoading(false);
-        setResponse("Logueado")
-        localStorage.setItem('user', res.data.accessToken)
-        if(form.name == 'admin') {
-          navegar('/panel')
-        } else {
-          navegar('/inbox')
         }
+      } else {
         toast.remove()
-      })
-      .catch((err) => {
-        toast.remove()
-        setLoading(false);
-        setResponse("No autorizado")
-        toast.error('Usuario y/o contraseña incorrectos')
+        toast.error('Introduzca todos los datos correctamente')
+      }
 
-        
-      })
+    } else if (origin == 'login') {
+      const { email, password } = form
+      if (email && password) {
+        axios.post('http://localhost:8000/api/login', form, { withCredentials: true, credentials: 'include' })
+          .then((res) => {
+            setLoading(false);
+            setResponse("Inicio de sesion exitoso")
+            localStorage.setItem('user', res.data.accessToken)
+            navegar('/home')
+            toast.remove()
+            toast('Bienvenido de nuevo', { duration: 5000, icon: '🙌' })
+          })
+          .catch((err) => {
+            toast.remove();
+            console.log(err);
+            setLoading(false);
+            setResponse("Fallido")
+            toast.error('Correo y/o contraseña incorrrectos')
+          })
+      } else {
+        toast.remove();
+        toast.error('Introduzca todos los datos correctamente')
+      }
+    } else if (origin == 'addservice') {
+      axios.post('http://localhost:8000/api/newservice', form, { withCredentials: true, credentials: 'include' })
+        .then((res) => {
+          toast.remove()
+          setLoading(false);
+          setResponse("Servicio enviado")
+          console.log(res)
+          setForm(initialForm)
+          toast.success('Servicio creado correctamente')
+        })
+        .catch((err) => {
+          toast.remove()
+          console.log(err);
+          setLoading(false);
+          setResponse("Fallido")
+          toast.error('Servicio no fue creado')
+        })
+
+    } else if (origin == 'access') {
+      axios.post('http://localhost:8000/api/login/internal', form, { withCredentials: true, credentials: 'include' })
+        .then((res) => {
+          setLoading(false);
+          setResponse("Logueado")
+          localStorage.setItem('user', res.data.accessToken)
+          if (form.name == 'admin') {
+            navegar('/panel')
+          } else {
+            navegar('/inbox')
+          }
+          toast.remove()
+        })
+        .catch((err) => {
+          toast.remove()
+          setLoading(false);
+          setResponse("No autorizado")
+          toast.error('Usuario y/o contraseña incorrectos')
+
+
+        })
     } else {
       console.log('No se detecta el origen')
     }
-    
-    
+
+
     setLoading(false)
-    
+
   }
 
   return {
