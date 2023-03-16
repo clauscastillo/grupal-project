@@ -6,16 +6,11 @@ const port = process.env.PORT || 8000;
 const cors = require('cors');
 const cookieParser = require('cookie-parser'); // para recibir cookies
 
-// Iniciar server
-
-app.listen(port, () => {
-  console.log('Server run at port ' + port)
-})
 
 // Configuracion para peticiones cruzadas y lectura de POST
 app.use(cors({
-  origin: 'http://localhost:5173',
-  origin: 'http://127.0.0.1:5173',
+  origin: 'http://localhost:3002',
+  //origin: 'http://127.0.0.1:3002',
   credentials: true
 }));
 
@@ -59,5 +54,10 @@ const minutos = fecha.getMinutes()
 
 console.log(`La fecha de hoy es ${dia}/${mes()}/${anio} y son las ${horalocal}:${minutos}`)
 
+// Iniciar server
+
+app.listen(port, () => {
+  console.log('Server run at port ' + port)
+})
 
 

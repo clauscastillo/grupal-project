@@ -82,11 +82,15 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
-      axios.post('http://localhost:8000/api/login', {email,password}, { withCredentials: true, credentials: 'include' })
+      axios.post('http://localhost:8000/api/login', 
+      {email,password}, 
+      { withCredentials: true, credentials: 'include' })
         .then((res) => {
           setLoading(false);
+          console.log(res, 
+            "BUSCO COOKIE")
           setResponse("Inicio de sesion exitoso")
-          localStorage.setItem('user', res.data.accessToken)
+          localStorage.setItem('user', res.data.accesToken)
           navegar('/home')
           toast.remove()
           toast('Bienvenido de nuevo', { duration: 5000, icon: '🙌' })

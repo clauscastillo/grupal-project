@@ -168,8 +168,10 @@ const Register = () => {
       collaborator: false
     }, { withCredentials: true, credentials: 'include' })
       .then((res) => {
+        console.log(res)
         setLoading(false);
         setResponse("Creado con exito");
+        localStorage.setItem('user', res.data.accessToken);
         navegar('/home');
         toast.remove()
         toast.success('Usuario Registrado con exito', { duration: 5000 })

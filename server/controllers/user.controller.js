@@ -2,7 +2,6 @@ const User = require('../models/users.model')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const SECRET = process.env.KEYJWT
-
 module.exports = {
 
   getUser: async (req, res) => {
@@ -37,9 +36,10 @@ module.exports = {
       } else {
         const userToken = jwt.sign({ _id: user._id }, SECRET)
         console.log(userToken)
-        res.status(201).cookie('userToken', userToken, { httpOnly: true }).json({ successMessage: "Usuario logeado", user })
+        res.status(201).cookie('userToken', userToken, { httpOnly: true }).json({ successMessage: "Usuario logeado", user: user, accesToken: userToken })
       }
     } catch (error) {
+      console.log(error)
       res.status(400).json({ error: "Email/Password no valido" })
 
     }
