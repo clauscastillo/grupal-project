@@ -179,7 +179,9 @@ const Register = () => {
       .catch((err) => {
         console.log(err)
         toast.remove()
+        setErrors(err.response.data.error)
         setLoading(false);
+        toast.error(errors)
       })
   }
 
