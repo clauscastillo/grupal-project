@@ -17,17 +17,17 @@ const UserSchema = mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: [true, "password is required"],
     minlength: [8, "Password must be 8 characters or longer"]
   },
   phone: {
     type: Number,
-    required: true,
+    required: [true, "phone is required"],
     minlength: [10, "Phone number must have 10 numbers"]
   },
   email: {
     type: String,
-    required: true,
+    required: [true, "email is required"],
     validate: {
       validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
       message: "Please enter a valid email"
