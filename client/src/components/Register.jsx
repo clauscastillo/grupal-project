@@ -221,7 +221,9 @@ const Register = () => {
           <label htmlFor="" className='form-label'>Nombre</label>
           <input value={form.name} type="text" name="name" id="name" onChange={handleChange} className='form-control' />
         </div>
-        {<p className='text-danger'>{nameErr}</p>}
+        {
+          <p className='text-danger'>{nameErr}</p>
+        }
         <div className='col-md-6'>
           <label htmlFor="" className='form-label'>Correo</label>
           <input value={form.email} type="text" name="email" id="email" onChange={handleChange} className='form-control' />
