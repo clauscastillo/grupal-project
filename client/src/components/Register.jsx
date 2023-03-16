@@ -140,12 +140,10 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [empty, setEmpty] = useState(true)
   const [response, setResponse] = useState(null)
-  const [errors, setErrors] = useState({
-    name: null,
-    email: null,
-    password: null,
-    phone: null
-  })
+  const [nameErr, setNameErr] = useState([])
+  const [mailErr, setMailErr] = useState([])
+  const [telErr, setTelErr] = useState([])
+  const [passErr, setPassErr] = useState([])
 
 
   const handleChange = (e) => {
@@ -179,11 +177,18 @@ const Register = () => {
       .catch((err) => {
         console.log(err)
         toast.remove()
-        setErrors(err.response.data.error)
+        setNameErr(err.response.data.errors.name.message)
+        setMailErr(err.response.data.errors.email.message)
+        setTelErr(err.response.data.errors.phone.message)
+        setPassErr(err.response.data.errors.password.message)
         setLoading(false);
-        toast.error(errors)
+        // toast.error(errors)
       })
   }
+
+  console.log(nameErr)
+  console.log(passErr)
+
 
 
   // const handleBlur = (e) => {
@@ -195,6 +200,10 @@ const Register = () => {
   //     setErrors(validateForm(form));
   //   }
 
+  // }
+
+  // {
+  //   errors.name && <p className='text-danger'>{errors.name}</p>
   // }
 
   return (
@@ -211,40 +220,28 @@ const Register = () => {
         <div className='col-md-6'>
           <label htmlFor="" className='form-label'>Nombre</label>
           <input value={form.name} type="text" name="name" id="name" onChange={handleChange} className='form-control' />
-          {
-            errors.name && <p className='text-danger'>{errors.name}</p>
-          }
-
         </div>
+        {<p className='text-danger'>{nameErr}</p>}
         <div className='col-md-6'>
           <label htmlFor="" className='form-label'>Correo</label>
           <input value={form.email} type="text" name="email" id="email" onChange={handleChange} className='form-control' />
-          <p className='text-danger'>{errors.email}</p>
         </div>
+        {<p className='text-danger'>{mailErr}</p>}
         <div className='col-md-6'>
           <label htmlFor="" className='form-label'>Teléfono</label>
           <input value={form.phone} type="text" name="phone" id="phone" onChange={handleChange} className='form-control' />
-          {
-            errors.phone && <p className='text-danger'>{errors.phone}</p>
-          }
-
         </div>
+        {<p className='text-danger'>{telErr}</p>}
         <div>
           <label htmlFor="" className='form-label'>Contraseña</label>
           <input value={form.password} type="password" name="password" id="password" onChange={handleChange} className='form-control' />
-          {
-            errors.password && <p className='text-danger'>{errors.password}</p>
-          }
-
         </div>
+        {<p className='text-danger'>{passErr}</p>}
         <div>
           <label htmlFor="" className='form-label'>Confirmar Contraseña</label>
           <input value={form.confirm} type="password" name="confirm" id="confirm" className='form-control' onChange={handleChange} />
-          {
-            errors.confirm && <p className='text-danger'>{errors.confirm}</p>
-          }
-
         </div>
+        {form.password !== form.confirm ? <p className='text-danger'>passwords deben ser iguales</p> : null}
         <button id='register' className='btn btn-primary w-25 mx-auto my-3' type='submit'>Registrar</button>
       </form>
     </div>

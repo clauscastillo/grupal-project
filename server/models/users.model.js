@@ -22,12 +22,12 @@ const UserSchema = mongoose.Schema({
   },
   phone: {
     type: Number,
-    required: false,
+    required: true,
     minlength: [10, "Phone number must have 10 numbers"]
   },
   email: {
     type: String,
-    required: false,
+    required: true,
     validate: {
       validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
       message: "Please enter a valid email"
