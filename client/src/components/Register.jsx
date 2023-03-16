@@ -172,7 +172,7 @@ const Register = () => {
         setLoading(false);
         setResponse("Creado con exito");
         localStorage.setItem('user', res.data.accessToken);
-        navegar('/home');
+        // navegar('/home');
         toast.remove()
         toast.success('Usuario Registrado con exito', { duration: 5000 })
       })

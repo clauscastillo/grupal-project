@@ -69,13 +69,14 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({
-    alias: null,
-    name: null,
-    email: null,
-    password: null,
-    confirmPass: null
-  })
+  // const [errors, setErrors] = useState({
+  //   alias: null,
+  //   name: null,
+  //   email: null,
+  //   password: null,
+  //   confirmPass: null
+  // })
+  const [errors, setErrors] = useState([])
 
   const navegar = useNavigate()
 
@@ -100,13 +101,17 @@ const Login = () => {
           console.log(err);
           setLoading(false);
           setResponse("Fallido")
-          toast.error('Correo y/o contraseña incorrrectos')
+          setErrors(err.response.data.error)
+          toast.error(errors)
+          // toast.error('Correo y/o contraseña incorrrectos')
         })
     } else {
       toast.remove();
       toast.error('Introduzca todos los datos correctamente')
     }
   };
+
+  console.log(errors)
 
   return (
     <div className='col px-5'>
