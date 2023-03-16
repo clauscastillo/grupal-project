@@ -17,7 +17,7 @@ module.exports = {
       const userToken = jwt.sign({ _id: nuevoUsuario._id }, SECRET)
       // res.status(201).cookie('userToken', userToken, {httpOnly:true, expires:new Date(Date.now() + 90000)})
       res.status(201).cookie('userToken', userToken, { httpOnly: true })
-        .json({ successMessage: "Usuario registrado ", user: nuevoUsuario })
+        .json({ successMessage: "Usuario registrado ", user: nuevoUsuario, accesToken: userToken })
     } catch (error) {
       res.status(401).json(error)
     }
