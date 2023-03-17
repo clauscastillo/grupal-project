@@ -5,19 +5,20 @@ const SECRET = process.env.KEYJWT
 module.exports = {
 
   getUser: async (req, res) => {
-    User.find()
+    const token = req.headers.user
+    const user = jwt.verify(token, SECRET)
+    User.findById(user._id)
       .then((response) => {
         res.json(response)
       })
   },
-
   register: async (req, res) => {
     try {
       const nuevoUsuario = await User.create(req.body)
       const userToken = jwt.sign({ _id: nuevoUsuario._id }, SECRET)
       // res.status(201).cookie('userToken', userToken, {httpOnly:true, expires:new Date(Date.now() + 90000)})
       res.status(201).cookie('userToken', userToken, { httpOnly: true })
-        .json({ successMessage: "Usuario registrado ", user: nuevoUsuario, accesToken: userToken })
+        .json({ successMessage: "Usuario registrado ", user: nuevoUsuario })
     } catch (error) {
       res.status(401).json(error)
     }

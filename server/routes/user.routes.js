@@ -7,8 +7,8 @@ module.exports = (app) => {
     app.get('/api/user', getUser)
     app.post('/api/registeruser', register)
     app.post('/api/login', login)
-    app.get('/api/logout', logOutUser)
-    app.get('/api/islogged', isLogged)
+    app.get('/api/logout', authenticate, logOutUser)
+    app.get('/api/isLogged2', authenticate, isLogged)
     app.get("/api/userLogged", userLogged)
 
 

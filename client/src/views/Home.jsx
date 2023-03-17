@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../components/Header'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import Footer from '../components/Footer'
 import { AxiosHeaders } from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
 
@@ -10,34 +8,34 @@ import toast, { Toaster } from 'react-hot-toast'
 
 const Home = () => {
 
-  
+
   const navegar = useNavigate()
 
-  const [services, setServices] = useState({user:{name:''}, services: []});
+  const [services, setServices] = useState({ user: { name: '' }, services: [] });
   const [loading, setLoading] = useState(false)
   const user = localStorage.getItem('user')
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/services', {headers: {...AxiosHeaders, user: user}},
-     { withCredentials: true } )
-    .then((res) => {
-      setServices(res.data);
-      setLoading(true)
-    })
-    .catch((err) => {
-      setLoading(false)
-      if(err.response.status === 500) {
-        toast.error('Favor iniciar sesion o registrarse')
-      }
-    })
+    axios.get('http://localhost:8000/api/services', { headers: { ...AxiosHeaders, user: user } },
+      { withCredentials: true })
+      .then((res) => {
+        console.log(res, "services res")
+        setServices(res.data);
+        setLoading(true)
+        if (err.response.status === 500) {
+          toast.error('Favor iniciar sesion o registrarse')
+        }
 
+      })
   }, [])
 
-
   const handleLogout = () => {
-    localStorage.removeItem('user')
-    navegar('/register')
-  }
+    axios.get("http://localhost:8000/api/logout", { withCredentials: true })
+      .then((res) => {
+        console.log(res)
+        navegar("/");
+      });
+  };
   if (loading) {
     return (
       <div>
@@ -56,16 +54,16 @@ const Home = () => {
             </thead>
             <tbody>
               {
-              services.services.map((service, index) => {
-                if(service.status === 'Pendiente') {
-                  return (
-                    <tr key={index}>
-                      <td>{service.date}</td>
-                      <td><Link to={'/service/' + service._id}>{service.title}</Link></td>
-                      <td>{service.status}</td>
-                    </tr>
-                  )
-                }
+                services.services.map((service, index) => {
+                  if (service.status === 'Pendiente') {
+                    return (
+                      <tr key={index}>
+                        <td>{service.date}</td>
+                        <td><Link to={'/service/' + service._id}>{service.title}</Link></td>
+                        <td>{service.status}</td>
+                      </tr>
+                    )
+                  }
                 })
               }
             </tbody>
@@ -81,16 +79,16 @@ const Home = () => {
             </thead>
             <tbody>
               {
-              services.services.map((service, index) => {
-                if(service.status !== 'Pendiente') {
-                  return (
-                    <tr key={index}>
-                      <td>{service.date}</td>
-                      <td><Link to={'/service/' + service._id}>{service.title}</Link></td>
-                      <td>{service.status}</td>
-                    </tr>
-                  )
-                }
+                services.services.map((service, index) => {
+                  if (service.status !== 'Pendiente') {
+                    return (
+                      <tr key={index}>
+                        <td>{service.date}</td>
+                        <td><Link to={'/service/' + service._id}>{service.title}</Link></td>
+                        <td>{service.status}</td>
+                      </tr>
+                    )
+                  }
                 })
               }
             </tbody>
@@ -100,7 +98,7 @@ const Home = () => {
     )
 
   }
-  
+
 }
 
 export default Home

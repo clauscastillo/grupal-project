@@ -8,7 +8,9 @@ const SECRET = process.env.KEYJWT
 const getServices = (req, res) => {
     console.log(req.headers, "HEADERS!!!!!")
     const token = req.headers.user
+    console.log(token, "tooookeeeen")
     const user = jwt.verify(token, SECRET)
+    console.log(user, "uuuuusssssssssseeeeeeeeeeeerrrrrrrr")
     User.findById(user._id)
         .then((response) => {
             Service.find({ idClient: user._id })
