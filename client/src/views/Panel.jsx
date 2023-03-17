@@ -101,7 +101,7 @@ const Panel = () => {
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Tipo</th>
+              <th>Cargo</th>
             </tr>
           </thead>
           <tbody>
@@ -111,9 +111,7 @@ const Panel = () => {
                   return (
                     <tr key={i}>
                       <td>{u.name}</td>
-                      {
-                      u.business == true ? <td>Empresa</td> : <td>Particular</td>  
-                      }
+                      <td>{u.charge}</td>
                     </tr>
                   )
                 }

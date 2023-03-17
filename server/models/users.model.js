@@ -2,42 +2,39 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
 
 const UserSchema = mongoose.Schema({
-  admin: Boolean,
-  name: {
-    type: String,
-    required: [true, "Name is required"],
-    validate: {
-      validator: val => /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/.test(val),
-      message: "Use valid characters"
-    }
-  },
-  business: {
-    type: Boolean,
-    required: false
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: [8, "Password must be 8 characters or longer"]
-  },
-  phone: {
-    type: Number,
-    required: false,
-    minlength: [10, "Phone number must have 10 numbers"]
-  },
-  email: {
-    type: String,
-    required: false,
-    validate: {
-      validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
-      message: "Please enter a valid email"
-    }
-  },
-  collaborator: {
-    type: Boolean,
-    required: false
-  }
-}, { timestamps: true })
+    admin: Boolean,
+    name: {
+      type: String,
+      required: [true, "Name is required"]
+    },
+    business: {
+      type: Boolean,
+      required: false
+    },  
+    password: {
+      type: String,
+      required: true,
+      minlength: [8, "Password must be 8 characters or longer"]
+    },
+    phone: {
+      type: Number,
+      required: false
+    },
+    email: {
+      type: String,
+      required: false,
+      validate: {
+        validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
+        message: "Please enter a valid email"
+      } 
+    },
+    collaborator: {
+      type: Boolean,
+      required: false
+    },
+    charge: String
+}, {timestamps: true})
+
 
 // Password encrypted
 UserSchema.pre('save', async function (next) {
