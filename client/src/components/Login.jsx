@@ -69,13 +69,6 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [errors, setErrors] = useState({
-  //   alias: null,
-  //   name: null,
-  //   email: null,
-  //   password: null,
-  //   confirmPass: null
-  // })
   const [errors, setErrors] = useState([])
 
   const navegar = useNavigate()
@@ -92,6 +85,7 @@ const Login = () => {
             "BUSCO COOKIE")
           setResponse("Inicio de sesion exitoso")
           localStorage.setItem('user', res.data.accesToken)
+          console.log(res.data.accesToken)
           navegar('/home')
           toast.remove()
           toast('Bienvenido de nuevo', { duration: 5000, icon: '🙌' })
@@ -110,8 +104,6 @@ const Login = () => {
       toast.error('Introduzca todos los datos correctamente')
     }
   };
-
-  console.log(errors)
 
   return (
     <div className='col px-5'>

@@ -5,12 +5,13 @@ const SECRET = process.env.KEYJWT
 module.exports = {
 
   getUser: async (req, res) => {
-    User.find()
+    const token = req.headers.user
+    const user = jwt.verify(token, SECRET)
+    User.findById(user._id)
       .then((response) => {
         res.json(response)
       })
   },
-
   register: async (req, res) => {
     try {
       const nuevoUsuario = await User.create(req.body)

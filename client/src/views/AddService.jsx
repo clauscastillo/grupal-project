@@ -57,6 +57,7 @@ const AddService = () => {
   useEffect(() => {
     axios.get('http://localhost:8000/api/user', {headers: {...AxiosHeaders, user: user}})
     .then((res) => {
+      console.log(res, "resssssssss")
       if(form.idClient !== res.data._id) {
         setForm({
           ...form,
