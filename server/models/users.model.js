@@ -31,7 +31,8 @@ const UserSchema = mongoose.Schema({
     collaborator: {
       type: Boolean,
       required: false
-    }
+    },
+    charge: String
 }, {timestamps: true})
 
 // Password encrypted

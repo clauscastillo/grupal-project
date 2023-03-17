@@ -22,8 +22,14 @@ const Home = () => {
     .then((res) => {
       setServices(res.data);
       setLoading(true)
-
     })
+    .catch((err) => {
+      setLoading(false)
+      if(err.response.status === 500) {
+        toast.error('Favor iniciar sesion o registrarse')
+      }
+    })
+
   }, [])
 
 
