@@ -35,21 +35,16 @@ const UserSchema = mongoose.Schema({
     charge: String
 }, {timestamps: true})
 
+
 // Password encrypted
-UserSchema.pre('save', async function(next){
-  try{
+UserSchema.pre('save', async function (next) {
+  try {
     const hashedPassword = await bcrypt.hash(this.password, 10)
     this.password = hashedPassword
-  }catch{
+  } catch {
     console.log('Error at save user')
   }
 })
-
-// UserSchema.methods.generateAuthToken = function() {
-//   const token = jwt.sign({_id: this._id}, process.env.KEYJWT, {expiresIn:"7d"})
-//   return token
-// }
-
 
 
 const User = mongoose.model('users', UserSchema);

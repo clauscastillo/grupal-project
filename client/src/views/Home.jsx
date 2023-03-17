@@ -18,7 +18,8 @@ const Home = () => {
   const user = localStorage.getItem('user')
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/services', {headers: {...AxiosHeaders, user: user}} )
+    axios.get('http://localhost:8000/api/services', {headers: {...AxiosHeaders, user: user}},
+     { withCredentials: true } )
     .then((res) => {
       setServices(res.data);
       setLoading(true)

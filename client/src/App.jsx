@@ -13,15 +13,16 @@ import Status from './views/Status'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Panel from './views/Panel'
+import PrivateRoute from './components/PrivateRoute'
 
-const App = () =>  {
-  
+const App = () => {
+
 
   return (
     <div className="App">
       <BrowserRouter>
-      <Toaster />
-      <Header />
+        <Toaster />
+        <Header />
         <Routes>
           <Route path='/' element={<Index />}></Route>
           <Route path='/home' element={<Home />}></Route>
@@ -29,14 +30,17 @@ const App = () =>  {
           <Route path='/addservice' element={<AddService />}></Route>
           <Route path='/service/:id' element={<Service />}></Route>
           <Route path='/inbox' element={<Inbox />}></Route>
-          <Route path='/status/:id' element={<Status/>}></Route>
+          {/* <Route path='/status/:id' element={<Status/>}></Route> */}
           <Route path='/access' element={<Access />}></Route>
           <Route path='/panel' element={<Panel />}></Route>
-          <Route path='*' element={<NotFound/>}></Route>
+          <Route path='*' element={<NotFound />}></Route>
+          <Route element={<PrivateRoute />}>
+            <Route path='/todasseries' element={<Status />} />
+          </Route>
         </Routes>
-      <Footer />
+        <Footer />
       </BrowserRouter>
-      
+
     </div>
   )
 }
