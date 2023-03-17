@@ -38,7 +38,6 @@ const UserSchema = mongoose.Schema({
     required: false
   }
 }, { timestamps: true })
-
 // Password encrypted
 UserSchema.pre('save', async function (next) {
   try {

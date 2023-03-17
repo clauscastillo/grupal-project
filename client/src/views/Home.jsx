@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../components/Header'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import Footer from '../components/Footer'
 import { AxiosHeaders } from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
 
@@ -24,15 +22,12 @@ const Home = () => {
         console.log(res, "services res")
         setServices(res.data);
         setLoading(true)
+        if (err.response.status === 500) {
+          toast.error('Favor iniciar sesion o registrarse')
+        }
 
       })
   }, [])
-
-
-  // const handleLogout = () => {
-  //   localStorage.removeItem('user')
-  //   navegar('/register')
-  // }
 
   const handleLogout = () => {
     axios.get("http://localhost:8000/api/logout", { withCredentials: true })
